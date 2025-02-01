@@ -12,29 +12,42 @@ const Home = () => {
   if (store.loading) return <p>Loading...</p>;
   if (store.error) return <p>Error: {store.error}</p>;
 
+
+
   return (
     <>
       <div className="container d-flex flex-column align-items-center">
         <h1>Characters</h1>
-        {store.dataPeople.map((person) => (
-          <HomeInfoCard
-            key={person.uid}
-            image="asd"
-            name={person.name}
-            url={person.url}
-          />
-        ))}
+        <div className="container mt-4">
+          <div className="row justify-content-center g-4">
+            {store.dataPeople.map((person) => (
+              <div key={person.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+                <HomeInfoCard
+                  image={person.image}
+                  name={person.name}
+                  url={person.url}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+      
       <div className="container d-flex flex-column align-items-center">
         <h1>Planets</h1>
-        {store.dataPlanets.map((planet) => (
-          <HomeInfoCard
-            key={planet.uid}
-            image="asd"
-            name={planet.name}
-            url={planet.url}
-          />
-        ))}
+        <div className="container mt-4">
+          <div className="row justify-content-center g-4">
+            {store.dataPlanets.map((planets) => (
+              <div key={planets.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+                <HomeInfoCard
+                  image={planets.image}
+                  name={planets.name}
+                  url={planets.url}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
