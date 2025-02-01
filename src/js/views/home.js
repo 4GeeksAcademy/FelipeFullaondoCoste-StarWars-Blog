@@ -1,39 +1,32 @@
-import React, { useEffect, useContext } from "react";
-import { Context } from "../store/appContext";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { HomeInfoCard } from "../component/home_info_card";
 
 const Home = () => {
-  const { store, actions } = useContext(Context);
-
-  useEffect(() => {
-    actions.fetchData();
-  }, []);
-
-  if (store.loading) return <p>Loading...</p>;
-  if (store.error) return <p>Error: {store.error}</p>;
-
-
+  const navigate = useNavigate();
 
   return (
-    <>
-      <div className="container d-flex flex-column align-items-center">
-        <h1>Characters</h1>
-        <div className="container mt-4">
-          <div className="row justify-content-center g-4">
-            {store.dataPeople.map((person) => (
-              <div key={person.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
-                <HomeInfoCard
-                  image={person.image}
-                  name={person.name}
-                  url={person.url}
-                />
-              </div>
-            ))}
-          </div>
+    <div className="container text-center mt-5">
+      <h1 className="text-warning mb-4">Explore the Galaxy</h1>
+      <div className="row justify-content-center g-4">
+
+        <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+          <HomeInfoCard
+            image="https://starwars-visualguide.com/assets/img/categories/character.jpg"
+            name="Characters"
+            url={() => navigate("/characters")}
+          />
+        </div>
+
+        <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+          <HomeInfoCard
+            image="https://starwars-visualguide.com/assets/img/categories/planets.jpg"
+            name="Planets"
+            url={() => navigate("/planets")}
+          />
         </div>
       </div>
-
-    </>
+    </div>
   );
 };
 

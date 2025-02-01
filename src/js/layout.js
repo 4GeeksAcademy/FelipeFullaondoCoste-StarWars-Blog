@@ -16,14 +16,17 @@ const Layout = () => {
 	return (
 		<div>
 			<BrowserRouter basename={basename}>
-				<Navbar />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/characters" element={<Characters />} />
-					<Route path="/planets" element={<Planets />} />
-					<Route path="*" element={<h1>Not found!</h1>} />
-				</Routes>
-				<Footer />
+				<div className="d-flex flex-column min-vh-100">
+					<Navbar />
+					<div className="main-content">
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/characters" element={<Characters />} />
+							<Route path="/planets" element={<Planets />} />
+						</Routes>
+					</div>
+					<Footer />
+				</div>
 			</BrowserRouter>
 		</div>
 	);

@@ -17,7 +17,6 @@ const Home = () => {
     return (
         <>
             <div className="container d-flex flex-column align-items-center">
-                <h1>Characters</h1>
                 <div className="container mt-4">
                     <div className="row justify-content-center g-4">
                         {store.dataPeople.map((person) => (
