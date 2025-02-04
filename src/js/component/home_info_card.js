@@ -17,7 +17,7 @@ export const HomeInfoCard = ({ image, name, url, type, id }) => {
                 {typeof url === "string" ? (
                     <button onClick={handleClick} href={url} className="btn btn-warning">Ver más</button>
                 ) : (
-                    <button onClick={handleClick} className="btn btn-warning">Explorar</button>
+                    <button className="btn btn-warning">Explorar</button>
                 )}
             </div>
         </div>

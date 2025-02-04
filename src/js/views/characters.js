@@ -13,7 +13,6 @@ const Home = () => {
     if (store.error) return <p>Error: {store.error}</p>;
 
 
-
     return (
         <>
             <div className="container d-flex flex-column align-items-center">

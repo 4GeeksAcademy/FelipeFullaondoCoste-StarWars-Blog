@@ -1,8 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	// Imagen por defecto
 	const defaultImage = "https://placehold.co/288x288?text=No+Image";
-
-	// Verificar si la imagen existe
 	const checkImageExists = async (url) => {
 		try {
 			const response = await fetch(url, { method: "HEAD" });
@@ -16,8 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			dataPeople: [],
 			dataPlanets: [],
-			selectedCharacter: null, // Estado para un Character por ID
-			selectedPlanet: null, // Estado para un Planet por ID
+			selectedCharacter: null,
+			selectedPlanet: null, 
 			loading: true,
 			error: null,
 		},
@@ -34,7 +31,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!planetsResponse.ok) throw new Error(`HTTP error! status: ${planetsResponse.status}`);
 					const planetsJson = await planetsResponse.json();
 
-					// Agregar imágenes a personajes
 					const peopleWithImages = await Promise.all(
 						peopleJson.results.map(async (person, index) => {
 							const imageUrl = `https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg`;
@@ -45,7 +41,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					);
 
-					// Agregar imágenes a planetas
 					const planetsWithImages = await Promise.all(
 						planetsJson.results.map(async (planet, index) => {
 							const imageUrl = `https://starwars-visualguide.com/assets/img/planets/${index + 1}.jpg`;
@@ -67,7 +62,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// Obtener un Character por ID
 			fetchCharacterById: async (id) => {
 				try {
 					setStore({ loading: true });
@@ -88,7 +82,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// Obtener un Planet por ID
 			fetchPlanetById: async (id) => {
 				try {
 					setStore({ loading: true });
