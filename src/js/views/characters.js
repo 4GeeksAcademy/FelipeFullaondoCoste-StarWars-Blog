@@ -22,9 +22,12 @@ const Home = () => {
                         {store.dataPeople.map((person) => (
                             <div key={person.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
                                 <HomeInfoCard
+                                    key={person.uid}
                                     image={person.image}
                                     name={person.name}
                                     url={person.url}
+                                    id={person.uid}
+                                    type="character"
                                 />
                             </div>
                         ))}

@@ -22,9 +22,12 @@ const Home = () => {
                         {store.dataPlanets.map((planets) => (
                             <div key={planets.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
                                 <HomeInfoCard
+                                    key={planets.uid}
                                     image={planets.image}
                                     name={planets.name}
                                     url={planets.url}
+                                    id={planets.uid}
+                                    type="planet"
                                 />
                             </div>
                         ))}
