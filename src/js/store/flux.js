@@ -13,8 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			dataPeople: [],
 			dataPlanets: [],
+			dataStarships: [],
 			selectedCharacter: null,
 			selectedPlanet: null,
+			selectedStarship: null,
 			favorites: [],
 			loading: true,
 			error: null,
@@ -31,6 +33,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const planetsResponse = await fetch("https://www.swapi.tech/api/planets");
 					if (!planetsResponse.ok) throw new Error(`HTTP error! status: ${planetsResponse.status}`);
 					const planetsJson = await planetsResponse.json();
+
+					const starshipsResponse = await fetch("https://www.swapi.tech/api/starships");
+					if (!starshipsResponse.ok) throw new Error(`HTTP error! status: ${starshipsResponse.status}`);
+					const starshipsJson = await planetsResponse.json();
 
 					const peopleWithImages = await Promise.all(
 						peopleJson.results.map(async (person, index) => {
@@ -52,9 +58,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					);
 
+					const starshipWithImages = await Promise.all(
+						starshipsJson.results.map(async (starship, index) => {
+							const imageUrl = `https://starwars-visualguide.com/assets/img/starships/${index + 1}.jpg`;
+							return {
+								...starship,
+								image: await checkImageExists(imageUrl),
+							};
+						})
+					);
+
 					setStore({
 						dataPeople: peopleWithImages,
 						dataPlanets: planetsWithImages,
+						dataStarships: starshipWithImages,
 						loading: false,
 						error: null,
 					});
@@ -96,6 +113,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					setStore({
 						selectedPlanet: { ...data.result.properties, image },
+						loading: false,
+					});
+				} catch (error) {
+					setStore({ error: error.message, loading: false });
+				}
+			},
+
+			fetchStarshipById: async (id) => {
+				try {
+					setStore({ loading: true });
+
+					const response = await fetch(`https://www.swapi.tech/api/starships/${id}`);
+					if (!response.ok) throw new Error("No se pudo obtener el vehiculo");
+					const data = await response.json();
+
+					const imageUrl = `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
+					const image = await checkImageExists(imageUrl);
+
+					setStore({
+						selectedStarship: { ...data.result.properties, image },
 						loading: false,
 					});
 				} catch (error) {
