@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			dataPeople: [],
 			dataPlanets: [],
 			selectedCharacter: null,
-			selectedPlanet: null, 
+			selectedPlanet: null,
+			favorites: [],
 			loading: true,
 			error: null,
 		},
@@ -101,6 +102,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ error: error.message, loading: false });
 				}
 			},
+
+			toggleFavorite: (item) => {
+				const store = getStore();
+				const favorites = [...store.favorites];
+
+				const index = favorites.findIndex(fav => fav.id === item.id && fav.type === item.type);
+
+				if (index !== -1) {
+					favorites.splice(index, 1);
+				} else {
+					favorites.push(item);
+				}
+
+				setStore({ favorites }); 
+			},
+
 		},
 	};
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { HomeInfoCard } from "../component/home_info_card";
+import { InfoCard } from "../component/info_card";
 
 const Home = () => {
     const { store, actions } = useContext(Context);
@@ -20,7 +20,7 @@ const Home = () => {
                     <div className="row justify-content-center g-4">
                         {store.dataPeople.map((person) => (
                             <div key={person.uid} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
-                                <HomeInfoCard
+                                <InfoCard
                                     key={person.uid}
                                     image={person.image}
                                     name={person.name}
