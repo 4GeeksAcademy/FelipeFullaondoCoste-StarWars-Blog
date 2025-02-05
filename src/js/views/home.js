@@ -25,6 +25,14 @@ const Home = () => {
             url={() => navigate("/planets")}
           />
         </div>
+
+        <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+          <HomeInfoCard
+            image="https://starwars-visualguide.com/assets/img/categories/starships.jpg"
+            name="Starships"
+            url={() => navigate("/starships")}
+          />
+        </div>
       </div>
     </div>
   );

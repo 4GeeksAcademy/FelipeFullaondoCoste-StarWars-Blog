@@ -36,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const starshipsResponse = await fetch("https://www.swapi.tech/api/starships");
 					if (!starshipsResponse.ok) throw new Error(`HTTP error! status: ${starshipsResponse.status}`);
-					const starshipsJson = await planetsResponse.json();
+					const starshipsJson = await starshipsResponse.json();
 
 					const peopleWithImages = await Promise.all(
 						peopleJson.results.map(async (person, index) => {

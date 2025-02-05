@@ -11,6 +11,8 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import PlanetById from "./views/planetbyid";
 import CharacterById from "./views/characterbyid";
+import Starships from "./views/starships";
+import StarshipById from "./views/starshipbyid";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
